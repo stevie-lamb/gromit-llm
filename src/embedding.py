@@ -1,14 +1,14 @@
 import numpy as np
 
 class Embedding:
-    def __init__(self, embedding_size, total_tokens, seed=0):
+    def __init__(self, embedding_size, len, seed=0):
 
         self.emb_size = embedding_size
-        self.total_tokens = total_tokens
+        self.len = len
 
         rng = np.random.default_rng(seed)
 
-        self.embedding = rng.normal(0, 0.01, (embedding_size, total_tokens))
+        self.embedding = rng.normal(0, 0.01, (self.len, self.emb_size))
 
     def get_embedding(self, token_id):
         """

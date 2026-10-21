@@ -40,9 +40,8 @@ class TextDataset:
 
         self.input_ids = self.input_ids.reshape(int(len(self.input_ids) / context_window), context_window)
         self.target_ids = self.target_ids.reshape(int(len(self.target_ids) / context_window), context_window)
-        
-        
 
+        # TODO edit the dataset class to utilise arrays directly for speedier loading.
 
         # This block ensures we can reshape to the correct number of tokens! Otherwise we would be left with a wonky number.
         #self.unused_tokens = len(self.t_txt) % context_window
@@ -89,10 +88,6 @@ class TextDataset:
             loader.append((inputs, targets))
 
         return loader
-
-
-
-
 
 if __name__ == "__main__":
     pass
