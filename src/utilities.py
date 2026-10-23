@@ -10,7 +10,7 @@ class Softmax:
 
         pass
 
-    def forward(self, x):
+    def forward(self, x, axis=-1):
         """
         Each value in the list is exponentiated and then divided by the
         sum of all the other exponentiated values.
@@ -19,10 +19,10 @@ class Softmax:
         """
 
         x = np.array(x, dtype=np.float32)
+        x_max = np.max(x, axis=axis, keepdims=True)
+        x = x - x_max
 
-        x = x - np.max(x)
-
-        return np.exp(x) / np.sum(np.exp(x))
+        return np.exp(x) / np.sum(np.exp(x), axis=axis, keepdims=True)
 
     def backward(self):
         pass
@@ -39,10 +39,12 @@ class CrossEntropyLoss:
 
         x, y = np.array(x, dtype=np.float32), np.array(y, dtype=np.float32)
 
-        return - 1.0 * (y @ np.log(x).T)    # y @ x.t equiv to sigma(y * log(x)) for all i.
+        return - 1.0 * (y @ np.log(x).T)    # y @ x.t equiv to sigma(y * log(x)) for all i
 
     def backward(self):
         pass
+
+
 
 if __name__ == "__main__":
 
